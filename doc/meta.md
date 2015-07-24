@@ -5,7 +5,7 @@
 * Make and commit code changes.
 * Update `CHANGELOG.md`.
 * Update the gem version in `lib/needleman_wunsch_aligner/version.rb`.
-* Commit version bump and changelog.
+* Commit version bump and changelog with message ‘Bumped version to x.y.z’.
 * Run `rake release`. This will perform the following steps:
     * Build a gem package to e.g. pkg/needleman_wunsch_aligner-1.0.1.gem.
     * Push the `.gem` package to `Rubygems.org`
