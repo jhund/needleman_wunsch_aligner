@@ -50,7 +50,7 @@ Instantiate a new aligner with the two sequences and compute the optimal alignme
 
 Inspect the alignment:
 
-    aligner.print_alignment
+    puts aligner.inspect_alignment
 
     # =>   1 | nil
            2 | 2
@@ -59,7 +59,7 @@ Inspect the alignment:
 
 Inspect the score table:
 
-    aligner.print_as_table(:score)
+    puts aligner.inspect_matrix(:score)
     # =>            2   3   4
                 0  -1  -2  -3
             1  -1  -2  -3  -4
@@ -68,7 +68,7 @@ Inspect the score table:
 
 Inspect the traceback table:
 
-    aligner.print_as_table(:traceback)
+    puts aligner.inspect_matrix(:traceback)
     # =>            2   3   4
                 x   ←   ←   ←
             1   ↑   ↑   ↑   ↑
