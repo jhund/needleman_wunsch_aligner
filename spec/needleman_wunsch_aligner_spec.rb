@@ -34,6 +34,14 @@ describe NeedlemanWunschAligner do
         ]
       ],
       [
+        [1],
+        [1,2,3],
+        [
+          [1,nil,nil],
+          [1,2  ,3]
+        ]
+      ],
+      [
         [1,1,1,1],
         [2,2,2,2],
         [
@@ -94,19 +102,19 @@ describe NeedlemanWunschAligner do
 
     it 'prints the alignment' do
       aligner.inspect_alignment.must_equal([
-        '                   1 | nil                 ',
-        '                   2 | 2                   ',
-        '                   3 | 3                   ',
-        '                 nil | 4                   ',
+        '                   1  -  nil                 ',
+        '                   2  =  2                   ',
+        '                   3  =  3                   ',
+        '                 nil  +  4                   ',
       ].join("\n"))
     end
 
     it 'adjusts the column width' do
       aligner.inspect_alignment(4).must_equal([
-        '   1 | nil ',
-        '   2 | 2   ',
-        '   3 | 3   ',
-        ' nil | 4   ',
+        '   1  -  nil ',
+        '   2  =  2   ',
+        '   3  =  3   ',
+        ' nil  +  4   ',
       ].join("\n"))
     end
 

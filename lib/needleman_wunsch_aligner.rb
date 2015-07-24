@@ -54,12 +54,21 @@ class NeedlemanWunschAligner
   def inspect_alignment(col_width = 20)
     aligned_left_seq, aligned_top_seq = get_optimal_alignment
     s = []
-    aligned_left_seq.each_with_index do |ls_el, idx|
-      rs_el = aligned_top_seq[idx]
+    aligned_left_seq.each_with_index do |left_el, idx|
+      top_el = aligned_top_seq[idx]
+      delimiter = if top_el == left_el
+        '=' # match
+      elsif gap_indicator == top_el
+        '-' # delete
+      elsif gap_indicator == left_el
+        '+' # insert
+      else
+        '!' # mismatch
+      end
       s << [
-        ls_el.inspect[0...col_width].rjust(col_width),
-        rs_el.inspect[0...col_width].ljust(col_width),
-      ].join(' | ')
+        left_el.inspect[0...col_width].rjust(col_width),
+        top_el.inspect[0...col_width].ljust(col_width),
+      ].join("  #{ delimiter }  ")
     end
     s.join("\n")
   end
