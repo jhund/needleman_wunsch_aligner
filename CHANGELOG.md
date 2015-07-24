@@ -1,3 +1,7 @@
+### 1.0.2
+
+* Memoized computation of optimal alignment for better performance.
+
 ### 1.0.1
 
 * Added travis CI integration.
