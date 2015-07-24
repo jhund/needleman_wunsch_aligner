@@ -20,8 +20,10 @@ class NeedlemanWunschAligner
 
   # Returns two arrays that represent the optimal alignment.
   def get_optimal_alignment
-    construct_score_matrix_and_traceback_matrix
-    compute_optimal_alignment
+    @get_optimal_alignment ||= (
+      construct_score_matrix_and_traceback_matrix
+      compute_optimal_alignment
+    )
   end
 
   # This is a basic implementation of the scoring algorithm. See
@@ -67,7 +69,7 @@ class NeedlemanWunschAligner
   # @param col_width [Integer, optional], defaults to 3
   # @return [String]
   def inspect_matrix(which_matrix, col_width = 3)
-    get_optimal_alignment  if @score_matrix.nil?
+    get_optimal_alignment  # make sure we have computed the matrices
     the_matrix = case which_matrix
     when :traceback
       @traceback_matrix
