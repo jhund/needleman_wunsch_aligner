@@ -142,21 +142,22 @@ protected
     left = Array.new
     top = Array.new
     while row > 0 or col > 0
-      if @traceback_matrix[row][col] == '⬉'
+      case @traceback_matrix[row][col]
+      when '⬉'
         left.push(@left_seq[row-1])
         top.push(@top_seq[col-1])
         row -= 1
         col -= 1
-      elsif @traceback_matrix[row][col] == '←'
+      when '←'
         left.push(gap_indicator)
         top.push @top_seq[col-1]
         col -= 1
-      elsif @traceback_matrix[row][col] == '↑'
+      when '↑'
         left.push @left_seq[row-1]
         top.push(gap_indicator)
         row -= 1
       else
-        puts "something strange happened" # this shouldn't happen
+        raise "Handle this"
       end
     end
     [left.reverse, top.reverse]
