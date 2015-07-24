@@ -1,9 +1,6 @@
 # -*- coding: utf-8 -*-
 
-require 'spec_helper'
-require 'needleman_wunsch_aligner'
-require 'needleman_wunsch_aligner/example_paragraph_and_sentence_aligner'
-require 'pp'
+require_relative '../spec_helper'
 
 class NeedlemanWunschAligner
 
