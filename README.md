@@ -1,4 +1,4 @@
-# NeedlemanWunschAligner
+# Needleman Wunsch Aligner
 
 This gem finds the optimal alignment of two sequences of any kind of Ruby Objects. You can implement sophisticated scoring functions, using any of the Objects’ attributes.
 
