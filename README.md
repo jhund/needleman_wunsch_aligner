@@ -94,3 +94,19 @@ example.
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create a new Pull Request
+
+### Resources
+
+* [Source code (github)](https://github.com/jhund/needleman_wunsch_aligner)
+* [Issues](https://github.com/jhund/needleman_wunsch_aligner/issues)
+* [Rubygems.org](http://rubygems.org/gems/needleman_wunsch_aligner)
+
+[![Build Status](https://travis-ci.org/jhund/needleman_wunsch_aligner.svg?branch=master)](https://travis-ci.org/jhund/needleman_wunsch_aligner)
+
+### License
+
+[MIT licensed](https://github.com/jhund/needleman_wunsch_aligner/blob/master/LICENSE.txt).
+
+### Copyright
+
+Copyright (c) 2015 Jo Hund. See [(MIT) LICENSE](https://github.com/jhund/needleman_wunsch_aligner/blob/master/LICENSE.txt) for details.
