@@ -1,3 +1,7 @@
+### 1.0.3
+
+* Improved #inspect_alignment output.
+
 ### 1.0.2
 
 * Memoized computation of optimal alignment for better performance.
