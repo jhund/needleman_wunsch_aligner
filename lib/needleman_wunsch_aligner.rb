@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 require "needleman_wunsch_aligner/version"
 
 # Finds the optimal alignment of two sequences using the Needleman-Wunsch algorithm.
