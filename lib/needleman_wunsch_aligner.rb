@@ -46,24 +46,27 @@ class NeedlemanWunschAligner
     nil
   end
 
-  # Prints the optimal alignment.
+  # Returns a string representation of the optimal alignment in two columns.
   # @param col_width [Integer, optional] max width of each col in chars
-  def print_alignment(col_width = 20)
+  # @return [String]
+  def inspect_alignment(col_width = 20)
     aligned_left_seq, aligned_top_seq = get_optimal_alignment
-    puts
+    s = []
     aligned_left_seq.each_with_index do |ls_el, idx|
       rs_el = aligned_top_seq[idx]
-      puts [
-        ls_el.inspect[0..col_width].rjust(col_width),
-        rs_el.inspect[0..col_width].ljust(col_width),
+      s << [
+        ls_el.inspect[0...col_width].rjust(col_width),
+        rs_el.inspect[0...col_width].ljust(col_width),
       ].join(' | ')
     end
+    s.join("\n")
   end
 
-  # Prints either the score or the traceback matrix as table.
+  # Returns string representation of either the score or the traceback matrix.
   # @param which_matrix [Symbol] one of :traceback or :score
   # @param col_width [Integer, optional], defaults to 3
-  def print_as_table(which_matrix, col_width = 3)
+  # @return [String]
+  def inspect_matrix(which_matrix, col_width = 3)
     get_optimal_alignment  if @score_matrix.nil?
     the_matrix = case which_matrix
     when :traceback
@@ -74,27 +77,29 @@ class NeedlemanWunschAligner
       raise "Handle this: #{ which_matrix.inspect }"
     end
 
-    puts
-    puts 'left_seq = ' + @left_seq.join
-    puts 'top_seq = ' + @top_seq.join
-    puts
-    print ' ' * 2 * col_width
+    s = ''
+    s << 'left_seq = ' + @left_seq.join + "\n"
+    s << 'top_seq = ' + @top_seq.join + "\n"
+    s <<  "\n"
+    # Header row
+    s << ' ' * 2 * col_width
+    @top_seq.each_index { |e| s << @top_seq[e].to_s.rjust(col_width) }
+    s << "\n"
 
-    # Print header row
-    @top_seq.each_index { |e| print(@top_seq[e].to_s.rjust(col_width)) }
-
-    puts ''
     traverse_score_matrix do |row, col|
       if 0 == col and 0 == row
         # first column in first row
-        print ' '.rjust(col_width)
+        s << ' '.rjust(col_width)
       elsif 0 == col
         # first col in subsequent rows
-        print @left_seq[row - 1].to_s.rjust(col_width)
+        s << @left_seq[row - 1].to_s.rjust(col_width)
       end
-      print the_matrix[row][col].to_s.rjust(col_width)
-      puts '' if col == the_matrix[row].length - 1
+      # subsequent cells
+      s << the_matrix[row][col].to_s.rjust(col_width)
+      # finalize row
+      s << "\n" if col == the_matrix[row].length - 1
     end
+    s
   end
 
 protected

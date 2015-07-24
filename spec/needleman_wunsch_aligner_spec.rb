@@ -4,7 +4,7 @@ require_relative './spec_helper'
 
 describe NeedlemanWunschAligner do
 
-  let(:aligner){ NeedlemanWunschAligner.new([], []) }
+  let(:aligner){ NeedlemanWunschAligner.new([1,2,3], [2,3,4]) }
 
   describe "#get_optimal_alignment" do
 
@@ -86,6 +86,28 @@ describe NeedlemanWunschAligner do
 
     it 'returns the expected value' do
       aligner.send(:gap_indicator).must_equal(nil)
+    end
+
+  end
+
+  describe "#inspect_alignment" do
+
+    it 'prints the alignment' do
+      aligner.inspect_alignment.must_equal([
+        '                   1 | nil                 ',
+        '                   2 | 2                   ',
+        '                   3 | 3                   ',
+        '                 nil | 4                   ',
+      ].join("\n"))
+    end
+
+    it 'adjusts the column width' do
+      aligner.inspect_alignment(4).must_equal([
+        '   1 | nil ',
+        '   2 | 2   ',
+        '   3 | 3   ',
+        ' nil | 4   ',
+      ].join("\n"))
     end
 
   end
