@@ -56,7 +56,7 @@ class NeedlemanWunschAligner
     s = []
     aligned_left_seq.each_with_index do |left_el, idx|
       top_el = aligned_top_seq[idx]
-      delimiter = if top_el == left_el
+      delimiter = if elements_are_equal_for_inspection(top_el, left_el)
         '=' # match
       elsif gap_indicator == top_el
         '-' # delete
@@ -66,8 +66,8 @@ class NeedlemanWunschAligner
         '!' # mismatch
       end
       s << [
-        left_el.inspect[0...col_width].rjust(col_width),
-        top_el.inspect[0...col_width].ljust(col_width),
+        element_for_inspection_display(left_el, col_width).rjust(col_width),
+        element_for_inspection_display(top_el, col_width).ljust(col_width),
       ].join("  #{ delimiter }  ")
     end
     s.join("\n")
@@ -111,6 +111,29 @@ class NeedlemanWunschAligner
       s << "\n" if col == the_matrix[row].length - 1
     end
     s
+  end
+
+  # Transforms element to an object that can be used for display when inspecting
+  # an alignment
+  # @params element [Object]
+  # @return [Object]
+  def element_for_inspection_display(element, col_width = nil)
+    r = case element
+    when String
+      element
+    else
+      element.inspect
+    end
+    col_width ? r[0...col_width] : r
+  end
+
+  # Returns true if top_el and left_el are considered equal for inspection
+  # purposes
+  # @params top_el [Object]
+  # @params left_el [Object]
+  # @return [Boolean]
+  def elements_are_equal_for_inspection(top_el, left_el)
+    top_el == left_el
   end
 
 protected

@@ -80,6 +80,7 @@ describe NeedlemanWunschAligner do
       end
 
     end
+
   end
 
   describe "#default_gap_penalty" do
@@ -116,6 +117,52 @@ describe NeedlemanWunschAligner do
         '   3  =  3   ',
         ' nil  +  4   ',
       ].join("\n"))
+    end
+
+    it 'uses #element_for_inspection_display' do
+      def aligner.element_for_inspection_display(element, col_width)
+        'override'
+      end
+
+      aligner.inspect_alignment(8).must_equal([
+        'override  -  override',
+        'override  =  override',
+        'override  =  override',
+        'override  +  override',
+      ].join("\n"))
+    end
+
+    it 'uses #elements_are_equal_for_inspection' do
+      def aligner.elements_are_equal_for_inspection(top_el, left_el)
+        false
+      end
+
+      aligner.inspect_alignment(4).must_equal([
+        '   1  -  nil ',
+        '   2  !  2   ',
+        '   3  !  3   ',
+        ' nil  +  4   ',
+      ].join("\n"))
+    end
+
+  end
+
+  describe "#element_for_inspection_display" do
+
+    it 'returns the expected value' do
+      aligner.element_for_inspection_display('hello', 3).must_equal('hel')
+    end
+
+  end
+
+  describe "#elements_are_equal_for_inspection" do
+
+    it 'returns true if equal' do
+      aligner.elements_are_equal_for_inspection('hello', 'hello').must_equal(true)
+    end
+
+    it 'returns false if not equal' do
+      aligner.elements_are_equal_for_inspection('hello', 'heller').must_equal(false)
     end
 
   end

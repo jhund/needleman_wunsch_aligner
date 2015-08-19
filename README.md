@@ -87,6 +87,11 @@ sophisticated ones by subclassing the `NeedlemanWunschAligner` class and overrid
 Please see `NeedlemanWunschAligner::ExampleParagraphAndSentenceAligner` for an
 example.
 
+You can also override these methods which are related to `#inspect_alignment`:
+
+* `element_for_inspection_display`
+* `elements_are_equal_for_inspection`
+
 ## Contributing
 
 1. Fork it ( https://github.com/jhund/needleman_wunsch_aligner/fork )
