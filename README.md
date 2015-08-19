@@ -12,17 +12,7 @@ Given two sequences
 The algorithm will find the optimal alignment based on a scoring function you specify:
 
     GCATG-CU
-    =+==!-=!
     G-ATTACA
-
-Meaning of the symbols:
-
-    = Match
-    ! Mismatch
-    + Insert
-    - Deletion
-
-Insert and Deletion are usually grouped together as `IndDel`.
 
 ## Installation
 
@@ -52,10 +42,10 @@ Inspect the alignment:
 
     puts aligner.inspect_alignment
 
-    # =>   1 | nil
-           2 | 2
-           3 | 3
-         nil | 4
+    # =>   1 - nil
+           2 = 2
+           3 = 3
+         nil + 4
 
 Inspect the score table:
 
@@ -69,11 +59,11 @@ Inspect the score table:
 Inspect the traceback table:
 
     puts aligner.inspect_matrix(:traceback)
-    # =>            2   3   4
-                x   ←   ←   ←
-            1   ↑   ↑   ↑   ↑
-            2   ↑   ⬉   ←   ←
-            3   ↑   ↑   ⬉   ←
+    # =>  2  3  4
+       x  ←  ←  ←
+    1  ↑  ↑  ↑  ↑
+    2  ↑  ⬉  ←  ←
+    3  ↑  ↑  ⬉  ←
 
 ## Customization
 
