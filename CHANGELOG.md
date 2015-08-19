@@ -1,3 +1,7 @@
+### 1.0.4
+
+* Added overridable methods for `#inspect_alignment`
+
 ### 1.0.3
 
 * Improved #inspect_alignment output.
