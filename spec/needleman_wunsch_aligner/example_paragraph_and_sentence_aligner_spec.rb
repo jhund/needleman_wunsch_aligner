@@ -143,7 +143,7 @@ class NeedlemanWunschAligner
       ].each do |(left_el, right_el, xpect)|
 
         it "handles #{ left_el.inspect }:#{ right_el.inspect }" do
-          aligner.send(:compute_score, left_el, right_el).must_equal(xpect)
+          aligner.send(:compute_score, left_el, right_el, 0, 0).must_equal(xpect)
         end
 
       end

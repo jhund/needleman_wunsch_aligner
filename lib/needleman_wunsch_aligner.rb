@@ -28,10 +28,14 @@ class NeedlemanWunschAligner
 
   # This is a basic implementation of the scoring algorithm. See
   # ExampleParagraphAndSentenceAligner for a more complex scoring function.
+  # NOTE: You can use row_index and col_index to improve performance if you know
+  # the maximum offset between left_el and top_el.
   # @param left_el [Object]
   # @param top_el [Object]
+  # @param row_index [Integer] zero based row index, origin is at top.
+  # @param col_index [Integer] zero based column index, origin is to the left.
   # @return [Numeric]
-  def compute_score(left_el, top_el)
+  def compute_score(left_el, top_el, row_index, col_index)
     left_el == top_el ? 1 : -3
   end
 
@@ -155,7 +159,13 @@ protected
         from_top = @score_matrix[row-1][col] + default_gap_penalty
         from_left = @score_matrix[row][col-1] + default_gap_penalty
         # @left_seq and @top_seq are off by 1 because we added cells for gaps in the matrix
-        from_top_left = @score_matrix[row-1][col-1] + compute_score(@left_seq[row-1], @top_seq[col-1])
+        score = compute_score(
+          @left_seq[row-1],
+          @top_seq[col-1],
+          row-1,
+          col-1
+        )
+        from_top_left = @score_matrix[row-1][col-1] + score
 
         # find max score and direction
         max, direction = [from_top_left, '⬉']

@@ -14,10 +14,12 @@ class NeedlemanWunschAligner
     #  s/b                            10    -10
     #  s/nil                                10
     #
-    # param left_el [Hash]
-    # param top_el [Hash]
-    # return [Integer]
-    def compute_score(left_el, top_el)
+    # @param left_el [Hash]
+    # @param top_el [Hash]
+    # @param row_index [Integer] zero based row index, origin is at top.
+    # @param col_index [Integer] zero based column index, origin is to the left.
+    # @return [Integer]
+    def compute_score(left_el, top_el, row_index, col_index)
       score = 0
       if left_el[:type] == top_el[:type]
         # Match on type (paragraph vs. sentence)
