@@ -1,3 +1,7 @@
+### 1.1.0
+
+* Changed #compute_score method params: Added row and column index for performance optimizations where I may not want to compute scores for the entire matrix, but only for a narrow band around the diagonal. The width of the band is determined by the maximum expected alignment offset.
+
 ### 1.0.4
 
 * Added overridable methods for `#inspect_alignment`
