@@ -1,4 +1,8 @@
-### 1.1.0
+### 1.1.1
+
+* Added :options argument to initializer to get access to external attrs when computing scores.
+
+## 1.1.0
 
 * Changed #compute_score method params: Added row and column index for performance optimizations where I may not want to compute scores for the entire matrix, but only for a narrow band around the diagonal. The width of the band is determined by the maximum expected alignment offset.
 
