@@ -13,9 +13,16 @@ class NeedlemanWunschAligner
 
   # @param left_seq [Array<Object>] sequence drawn at left of matrix
   # @param top_seq [Array<Object>] sequence drawn at top of matrix
-  def initialize(left_seq, top_seq)
+  # @param options [Hash, optional] can be used to provide state to the aligner
+  #                which can be used, e.g., when computing the score.
+  #                One example use case is to pass in the maximum expected
+  #                offset, and then not compute the entire score matrix, but
+  #                only a band around the diagonal, wide enough to handle the
+  #                maximum expected offset.
+  def initialize(left_seq, top_seq, options={})
     @left_seq = left_seq
     @top_seq = top_seq
+    @options = options
   end
 
   # Returns two arrays that represent the optimal alignment.
